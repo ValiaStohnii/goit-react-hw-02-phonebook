@@ -13,7 +13,14 @@ class Form extends Component {
 
   submitNumber = e => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.onSubmit(this.state);
+    this.reset();
+  };
+  reset = () => {
+    this.setState({
+      name: '',
+      number: '',
+    });
   };
 
   render() {
