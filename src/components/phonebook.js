@@ -14,17 +14,15 @@ class Phonebook extends React.Component {
     ],
     filter: '',
   };
-  contactId = nanoid();
 
   formSubmit = data => {
-    console.log(data.name);
-    console.log(data.number);
-
     const contact = {
-      id: this.contactId,
+      id: nanoid(),
       name: data.name,
       number: data.number,
     };
+
+    // alert('This name is olready in contact' )
 
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts],
@@ -37,16 +35,20 @@ class Phonebook extends React.Component {
 
   getFilteredContacts = () => {
     const { contacts } = this.state;
+    const normalizedFilter = this.state.filter.toLowerCase();
+    return contacts.filter(c => c.name.toLowerCase().includes(normalizedFilter));
+  };
+
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(c => c.id !== contactId),
+    }));
   };
 
   render() {
     const { filter } = this.state;
 
-    const normalizedFilter = this.state.filter.toLowerCase();
-
-    const filteredContacts = this.state.contacts.filter(c =>
-      c.name.toLowerCase().includes(normalizedFilter),
-    );
+    const filteredContacts = this.getFilteredContacts();
 
     return (
       <div>
@@ -54,7 +56,7 @@ class Phonebook extends React.Component {
         <Form onSubmit={this.formSubmit} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
-        <ContactList contacts={filteredContacts} />
+        <ContactList contacts={filteredContacts} onDeleteContact={this.deleteContact} />
       </div>
     );
   }

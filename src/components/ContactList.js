@@ -1,11 +1,15 @@
 import React from 'react';
 
-const ContactList = ({ contacts }) => {
+const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <ul>
       {contacts.map(contacts => (
-        <li id={contacts.id} name={contacts.name}>
-          {contacts.name} {contacts.number}
+        <li key={contacts.id} name={contacts.name}>
+          <p>{contacts.name}</p>
+          <p>{contacts.number}</p>
+          <button type="button" onClick={() => onDeleteContact(contacts.id)}>
+            Delete
+          </button>
         </li>
       ))}
     </ul>
