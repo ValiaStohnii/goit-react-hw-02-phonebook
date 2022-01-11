@@ -28,9 +28,6 @@ class Phonebook extends React.Component {
       alert('This name is olready in contact');
       return;
     }
-
-    // alert('This name is olready in contact' )
-
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts],
     }));
