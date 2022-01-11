@@ -1,15 +1,13 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
 
-const ContactList = ({ name, number }) => {
-  const contactId = nanoid();
+const ContactList = ({ contacts }) => {
   return (
     <ul>
-      <li>
-        <p name={name} id={contactId}>
-          {name}: {number}
-        </p>
-      </li>
+      {contacts.map(contacts => (
+        <li id={contacts.id} name={contacts.name}>
+          {contacts.name} {contacts.number}
+        </li>
+      ))}
     </ul>
   );
 };
