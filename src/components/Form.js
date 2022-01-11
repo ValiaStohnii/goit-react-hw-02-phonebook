@@ -13,7 +13,6 @@ class Form extends Component {
 
   submitNumber = e => {
     e.preventDefault();
-
     this.props.onSubmit(this.state);
     this.reset();
   };
