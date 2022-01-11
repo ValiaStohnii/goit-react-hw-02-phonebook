@@ -22,6 +22,13 @@ class Phonebook extends React.Component {
       number: data.number,
     };
 
+    const normalizeName = this.textNormalize(data.name);
+
+    if (this.state.contacts.some(item => item.name.toLowerCase() === normalizeName)) {
+      alert('This name is olready in contact');
+      return;
+    }
+
     // alert('This name is olready in contact' )
 
     this.setState(prevState => ({
@@ -31,6 +38,10 @@ class Phonebook extends React.Component {
 
   changeFilter = e => {
     this.setState({ filter: e.currentTarget.value });
+  };
+
+  textNormalize = text => {
+    return text.toLowerCase();
   };
 
   getFilteredContacts = () => {
